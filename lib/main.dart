@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -35,14 +36,20 @@ class _QuizPageState extends State<QuizPage> {
   static final startQuestionIndex = 0;
   int questionIndex = startQuestionIndex;
 
-  void _answerHandle (bool answer) {
+  void _answerHandle(bool answer) {
     if (answer == questions[questionIndex].answer) {
       setState(() {
-        _scoreKeeper.add(Icon(Icons.check, color: Colors.green,));
+        _scoreKeeper.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
       });
     } else {
       setState(() {
-        _scoreKeeper.add(Icon(Icons.close, color: Colors.red,));
+        _scoreKeeper.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
       });
     }
 
@@ -51,6 +58,7 @@ class _QuizPageState extends State<QuizPage> {
       questionIndex = (questionIndex + 1) % questions.length;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -112,20 +120,11 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        Row(
+        Wrap(
+          direction: Axis.horizontal,
           children: _scoreKeeper,
         ),
       ],
     );
-  }
-}
-
-class QandA {
-  String question;
-  bool answer;
-
-  QandA(String question, bool answer) {
-    this.question = question;
-    this.answer = answer;
   }
 }
